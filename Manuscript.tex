@@ -72,11 +72,84 @@ or to solve for $\mathbf{d}$,
 \begin{equation}
 	\mathbf{\hat{l}} = \frac{\mathbf{p}_2-\mathbf{p}_1}{||\mathbf{p}_2-\mathbf{p}_1||}.
 \end{equation}
-The component of the measurement axis $\mathbf{z}$}
+The component of the measurement axis in the longitudinal direction is simply the $\mathbf{z}$ component of $\mathbf{\hat{l}}$. That is, at each angle $i=1,2$, the longitudinal component is
+\begin{equation}
+	l_i = \mathbf{\hat{l}}\cdot\mathbf{z}.
+\end{equation}
+}
+\par{Next we recall that the measurement axis $\mathbf{z}_i$ is a \textit{unit} vector, so $t_i^2 + l_i^2 = 1$. This means that
+	\begin{equation}
+		t_i = \sqrt{1-l_i^2}.
+	\end{equation}
+	With this, we have now found the elements of the matrix in Eqn \ref{recon}. The next goal is to register points to one another between orientations.
+}
+\par{For reasons we will motivate shortly, we begin by taking many measurements of the structure of interest along the longitudinal axis. For example, at orientation $i=1,2$, if we are interested in the OHC-DC, we find a single point in this region and call it $\mathbf{q}_0$. By the definition of the longitudinal direction, for any real $a$, $\mathbf{q}_0 + a\mathbf{\hat{l}}$ is also in the OHC-DC region. We choose a number of points $N$ and a spacing $\delta$ and take measurements at points
+	\begin{equation}
+		\mathbf{q}^i_n = \mathbf{q}^i_0 + n\delta\mathbf{\hat{l}},\;n=0,1,\ldots,N.
+	\end{equation}
+}
+\par{This gives us $N$ measurements of the structure evenly spaced longitudinally. In each measurement line, we inevitably also measure BM at some point $\mathbf{b}^i_n$. As $\mathbf{z}\neq\mathbf{\hat{t}}$, the OHC-DC and BM points measured in each line are not in the same longitudinal cross-section. For example, suppose that on the $\mathbf{z}$ axis in a single A-Scan, the BM and OHC-DC are $\Delta = (\mathbf{p}^i_n-\mathbf{b}^i_n)\cdot\mathbf{z}$ apart. Ideally, this value is independent of the cross-section, or $n$. The cross-sectional distance (i.e. longitudinal distance) between these points is thereby $r^i = \Delta l_i$.}
+\par{Now let's once again consider our first OHC-DC measurement at $\mathbf{q}^i_0$. It is in the same cross-section as a point on the BM at $\mathbf{b}^i_0+r^i\mathbf{\hat{l}}$. We have taken many measurements of BM along the longitudinal axis, so if $\delta$ is small, there exists an $n$ such that $r^i \approx n\delta$. That is, $\mathbf{q}^i_0$ is approximately in the same cross-section as $\mathbf{b}^i_n$ for this $n$.}
+\par{We can repeat this process for all measured OHC-DC points to form a list of \textit{aligned} OHC-DC/BM pairs (i.e. OHC-DC and BM in the same cross-section) at each orientation. Using this list, we can reformulate the problem of registering OHC-DC points as one of registering BM points -- the OHC-DC points aligned to these BM points would also be registered.}
+\par{To register BM points between orientations, we use the traveling wave to our advantage. To begin, \textbf{we assume that the BM moves entirely transversely}. This means that viewed at any angle, the phase response of BM motion will be identical. To register points on the BM between orientations, we compare the phase response at $\mathbf{b}^1_n$ to $\mathbf{b}^2_m$ for $n,m=1,2,\ldots,N$, and find the values for which the phase responses are most similar (by minimum square difference). This yields registered BM points across some range of the BM. As we aligned the BM points to OHC points in the previous step, we now have OHC-DC points registered as well. We can then perform our reconstruction.}
+\par{To make this process more concrete, we provide an illustrative example in the Results section below.}
 \subsection{Error dependence on angular difference}
+\par{The presentation above is in an ideal environment, wherein the reconstruction can be performed from any two measurements at distinct angles. Mathematically, the error associated with the angular difference arises from the matrix in Eqn \ref{recon}. Note that this matrix must be invertible, which require full row rank -- i.e. the rows must not be colinear. The rows of this matrix are the measurement axes, $\mathbf{z}_1$ and $\mathbf{z}_2$, which will never be colinear by design. The invertibility of this matrix is thereby guaranteed.}
+\par{However, it is intuitively clear that reconstructions could not be reliably made from two measurements taken, say, 1$^\circ$ apart. This lies in the fact that the matrix has a multiplicative impact on the noise in measurements $\delta_1$ and $\delta_2$. As a rule of thumb, if $\sigma_{max}$ and $\sigma_{min}$ are the maximum and minimum singular values of a matrix, then matrix multiplication reduces the SNR by a factor of the \textit{condition number}:}
+\begin{equation}
+	\kappa = \frac{|\sigma_{max}|}{|\sigma_{min}|}.
+\end{equation}
+\par{It can be shown that a matrix and its inverse have the same condition number. The formula for the singular values of a $2\times2$ matrix (using the element names of the relevant matrix) is known to be
+	\begin{align}
+		\sigma_{max} &= \sqrt{\frac{s_1+s_2}{2}},\\
+		\sigma_{min} &= \sqrt{\frac{s_1-s_2}{2}},
+	\end{align}
+where
+	\begin{align}
+		s_1 &= l_1^2 + t_1^2 + l_2^2 + t_2^2,\\
+		s_2 &= \sqrt{(l_1^2 + t_1^2 - l_2^2 - t_2^2) + 4(l_1l_2 + t_1t_2)^2}.
+	\end{align}
+}
+\par{We know that the measurement axes are unit vectors, so $l_i^2+t_i^2 = 1$ for $i=1,2$. That gives $s_1 = 2$ and $s_2 = 2(l_1l_2 + t_1t_2)$. Defining $\nu = l_1l_2+t_1t_2$, we simplify condition number formula to
+	\begin{equation}
+		\kappa = \sqrt{\frac{1+\nu}{1-\nu}},
+	\end{equation}
+a monotonically increasing function of $\nu$.
+}
+\par{We now note that $\nu = \mathbf{z}_1\cdot\mathbf{z}_2$, whichmay offer a bit of intuition -- the dot product is largest when the two vetors are nearer to parrallel, yielding an increase in condition number. To be more mathematically precise,
+	\begin{equation}
+		\nu = ||\mathbf{z}_1||\,||mathbf{z}_2||\cos{\theta} = \cos{\theta},
+	\end{equation}
+where $\theta$ is the angular distance between the two vectors and we have used the fact that the measurement axes are unit vectors. We now can use double angle trigonometric identities to write the condition number very succinctly as a function of the angular difference between the two measurement axes:
+	\begin{align}
+		\kappa &= \sqrt{\frac{1+\cos\theta}{1-\cos\theta}}\\
+			   &=\sqrt{\frac{1}{\tan^2\frac{\theta}{2}}}\\
+			   &=\frac{1}{\bigg|\tan\frac{\theta}{2}\bigg|}.
+	\end{align}
+}
+\par{The condition number goes to infinity when the angular difference approaches 0, and approaches a minimum at 1 as the angular difference approaches 90$^\circ$. While 90$^\circ$ would be optimal, the maximum achievable angular difference is restricted by the experimental preparation. For example, in measurements taken through the gerbil round window, 15$^\circ$ is often the largest achievable angular difference. Table \ref{kappas} shows condition numbers for a selection of angular deviations achievable in gerbil through the round window membrane.}
+\par{For context, the noise floor of our displacement measurements is approximately 0.1 nm. For a vector of two independent measurements $\delta_1$ and $\delta_2$, our noise floor would thereby be about $\sqrt{0.1^2 + 0.1^2}\approx0.14$ nm. The noise increase induced by reconstruction using measurements taken 15$^\circ$ (a factor of 7.6, according to Table \ref{kappas}) apart would yield a noise floor of $\sim$1 nm.}
+
+\begin{table}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Angular deviation & Condition number $\kappa$ \\
+        \hline
+        20$^\text{o}$ & 5.67\\
+        15$^\text{o}$ & 7.60\\
+        10$^\text{o}$ & 11.43\\
+        5$^\text{o}$ & 22.90 \\
+        1$^\text{o}$ & 114.59\\
+        \hline
+    \end{tabular}
+    \caption{A table of condition numbers for the projection matrix at possible measurement angular deviations.}
+\label{kappas}
+\end{center}
+\end{table}
 
 \section{Results}
-\subsection{Experimental reconstruction}
+\subsection{Illustrative example}
 \subsection{Comparison to previous measurements}
 
 \section{Extensions of the method}
