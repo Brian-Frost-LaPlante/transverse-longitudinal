@@ -32,18 +32,59 @@
 \par{We have discussed these issues in terms of the anatomical coordinates of the cochlea (longitudinal, radial and transverse), using volume scans to determine the optical axis' relation to more physiologically relevant axes \citep{frost2022}. Using this method, one can account for the longitudinal (tonotopic) distance between measured points in a single A-Scan. One can also determine which components of motion are most represented in a measurement, offering more context to reported results. However, even this is not sufficient to separate out the motion components themselves.}
 \par{It has been shown by Cooper et al that viewing angle can significantly impact both the magnitude and phase response of the structures being measured \citep{cooper2018}. Moreover, recent purely transverse measurements in the gerbil base have shown different character than measurements taken at an angle relative to basilar membrane (BM) normal \citep{Puria2022}. FOR EXAMPLE SEE FIG WHICH EXPLAINS DIFFERENCE BETWEEN TRANSV AND ANGLED MEAS}
 \par{Several methods have been developed to attempt to address this problem. Lee et al used back-projection of measurements taken at two different angles to reconstruct radial-transverse motion in mouse, via carefully rotating the preparation to ensure they stay in the same cross-section \citep{lee}. Kim et al used a three-beam OCT system in mouse to measure motion at the same location from three angles, and back-project to resolve three-dimensional motion CITE. These methods are challenging to implement in the gerbil base, where the anatomy and opacity of the bone significantly restricts the beam angle when viewing through the round window (RW). The latter method also requires significant hardware and space.}
-\par{We have developed a method to reconstruct the longitudinal and transverse components of motion \textit{in vivo} via OCT. Similar to the work described above, we reconstruct via back-projecting measurements taken at two angles. However, our method performs registration via \textit{physiology} rather than mechanical precision -- our method requires no \textit{a priori} knowledge of either measurement angle, or of the positions of the structures being measured. Instead we use the traveling wave phase on the BM, along with a simplified version of the orientation program presented in Frost et al, 2022, to register intra-OCC positions between viewing angles. This allows the method to work in any species or preparation, including in the gerbil base in which we are particularly interested.}
+\par{We have developed a method to reconstruct the longitudinal and transverse components of motion \textit{in vivo} via OCT. Similar to the work described above, we reconstruct via back-projecting measurements taken at two angles. However, our method performs registration via \textit{physiology} rather than mechanical precision -- our method requires no \textit{a priori} knowledge of either measurement angle, or of the precise positions of the structures being measured. Instead we use the traveling wave phase on the BM, along with a simplified version of the orientation program presented in Frost et al, 2022, to register intra-OCC positions between viewing angles. This allows the method to work in any species or preparation, including in the gerbil base in which we are particularly interested.}
 \par{We present the method, an analysis of the accuracy of this method as a function of angular distance between viewing angles, and \textit{in vivo} experimental data taken through the RW in gerbil. We present longitudinal and transverse motion at the outer hair cell/Deiters' cell junction (OHC-DC), and see that the transverse data matches well with previously measured purely transverse motion in the gerbil base. In particular, we see that transverse OHC-DC motion phase lags BM motion phase across frequency by ~0.3 cycles, save at high SPL where the two seem to move in-phase. This is in stark contrast with motion measured at an angle with a longitudinal component, where a broadband phase lead of OHC-DC re BM is often seen \citep{frost2022}.}
 
 \section{Methods}
 \par{In this section, we will present our method for reconstructing transverse-longitudinal motion in the OCC. To begin, we will present the mathematical basis for this method. Then, we will describe the experimental process by which the quantities required for the reconstruction are acquired.}
 \subsection{Mathematics of reconstruction}
-\par{The true motion of each structure is three-dimensional. However, in this work, we are only concerned with longitudinal and transverse motion components. Ensuring that our measurement angles have no radial component, we can consider the ``true motion" as being a two-dimensional vector. Call the longitudinal and transverse unit vectors $\mathbf{\hat{l}}$ and $\mathbf{\hat{t}}$, respectively. The true motion can be written as a two-vector with longitudinal and transverse components as 
+\par{The true motion of each structure is three-dimensional. However, in this work, we are only concerned with longitudinal and transverse motion components. Ensuring that our measurement angles have no radial component, we can consider the ``true motion" of a single point of interest as being a two-dimensional vector. Call the longitudinal and transverse unit vectors $\mathbf{\hat{l}}$ and $\mathbf{\hat{t}}$, respectively. The true displacement can be written as a two-vector with longitudinal and transverse components as 
 \begin{equation}
     \mathbf{d} = d_l \mathbf{\hat{l}} + d_t \mathbf{\hat{t}}.
 \end{equation}
 }
-\par{Now suppose we begin with }
+\par{Our beam axis is a unit vector that can also be written in anatomical coordinates, having a transverse and longitudinal component. Consider two such beam axes,
+\begin{equation}
+    \mathbf{z}_1 = l_1 \mathbf{\hat{l}} + t_1 \mathbf{\hat{t}},\;\;\mathbf{z}_2 = l_2 \mathbf{\hat{l}} + t_2 \mathbf{\hat{t}}.
+\end{equation}
+}
+\par{We take measurements of the point of interest along both of these axes, $\delta_1$ and $\delta_2$. These are 1-D displacements, defined as the projection of the true motion $\mathbf{d}$ onto $\mathbf{z}_1$ and $\mathbf{z}_2$, respectively. Mathematically, this relationship is described as a dot product: 
+\begin{equation}
+	\delta_i = \mathbf{z}_i^T\mathbf{d},\;i=1,2.
+\end{equation}
+We can also write this as a system of two equations in matrix form as
+\renewcommand*{\arraystretch}{.5}
+\begin{equation}
+	\begin{pmatrix}\delta_1\\ \delta_2\end{pmatrix} = \begin{pmatrix}l_1&t_1\\l_2&t_2\end{pmatrix}\begin{pmatrix}d_l\\d_t\end{pmatrix},
+\end{equation}
+or to solve for $\mathbf{d}$,
+\renewcommand*{\arraystretch}{.5}
+\begin{equation}
+	\begin{pmatrix}d_l\\d_t\end{pmatrix}= \begin{pmatrix}l_1&t_1\\l_2&t_2\end{pmatrix}^{-1}\begin{pmatrix}\delta_1\\ \delta_2\end{pmatrix}.
+		\label{recon}
+\end{equation}
+}
+\par{Our goal is to reconstruct the 2-D motion, i.e. to find $\mathbf{d}$. To solve for $\mathbf{d}$, we need to measure $\delta_1$ and $\delta_2$ \textit{at the same location}, and we need to find anatomical coordinate representations of the measurement axes (i.e. the elements of the $2\times 2$ matrix in Eq. \ref{recon}).}
+\subsection{Experimental method}
+\par{To perform the reconstruction according to Eq. \ref{recon}, we must be able to (1) determine the measurement axes in anatomical coordinates ($l_i$ and $t_i$), and (2) register a point of interest between two orientations so that the \textit{same structure} may be measured at both angles. We present a method that performs both of these tasks without any \textit{a priori} knowledge of precise location structures or beam angles, using only a single OCT system and the traveling wave physiology of the mammallian cochlea. Each step is also presented visually in a panel in FIGURE.}
+\par{We begin with our OCT system viewing the OCC at some unknown angle with respect to the BM normal. Using the ThorLabs ThorImage software, we are able to view a real-time volume scan of the sample at this angle. Doing so, we note two points in the volume which lie on the same anatomical structure, and refer to their 3-D coordinates as $\mathbf{p}_1$ and $\mathbf{p}_2$. For example, $\mathbf{p}_1$ could be chosen to lie at the OHC-DC junction in some cross-section, and $\mathbf{p}_2$ to lie at the OHC-DC junction in a different cross-section. Note that these points are specified in \textit{optical} coordinates, where $\mathbf{\hat{z}}$ is the optic axis (depth), and $\mathbf{\hat{x}}$ and $\mathbf{\hat{y}}$ are the scanning directions.}
+\par{While the longitudinal and transverse directions are not constant in space -- they change along with the spiral of the cochlea -- one can approximate them as being stationary. This amounts to the local approximation of the BM as a plane, which is reasonable over a range of $\sim 200$ $\mu$m \citep{frost2022}. Wehn approximated this way, the line segment connecting anatomical structures of the same type between cross-sections is parallel to the longitudinal axis. That is, the longitudinal unit vector is given in optical coordinates by
+\begin{equation}
+	\mathbf{\hat{l}} = \frac{\mathbf{p}_2-\mathbf{p}_1}{||\mathbf{p}_2-\mathbf{p}_1||}.
+\end{equation}
+The component of the measurement axis $\mathbf{z}$}
+\subsection{Error dependence on angular difference}
+
+\section{Results}
+\subsection{Experimental reconstruction}
+\subsection{Comparison to previous measurements}
+
+\section{Extensions of the method}
+\par{Here we discuss two theoretical extensions of the method presented here -- one in which the accuracy of the method is improved by measuring from more than two longitudinal-transverse angles, and one in which the method is extended to reconstruct all three components of motion. Similar to the presented methods, these techniques require only a single OCT system and do not require any \textit{a priori} knowledge of the measurement angles or precise locations of the structures being measured.}
+\subsection{Overdetermined reconstruction}
+\subsection{Three-dimensional analogue}
+
+\section{Conclusions}
 
 \subsection{Coordinate Systems}
 

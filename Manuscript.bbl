@@ -1,0 +1,153 @@
+\providecommand{\noopsort}[1]{}\providecommand{\singleletter}[1]{#1}%
+\begin{thebibliography}{10}
+\def\enquote#1,{``#1,''}
+\def\enxquote#1{``#1''}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\def\plainquote#1{``#1''}
+\providecommand{\noopsort}[1]{}
+\providecommand{\switchargs}[2]{#2#1}
+\providecommand{\dourl}[1]{\href{http://#1}{\nolinkurl{#1}}}
+  \def\eatspace #1{#1}
+
+\bibitem{OCTtheory}
+\bibinfo{author}{J.~A. Izatt} and \bibinfo{author}{M.~A. Choma},
+  \emph{\bibinfo{title}{Theory of Optical Coherence Tomography}},
+  \bibinfo{pages}{47--72} (\bibinfo{publisher}{Springer Berlin Heidelberg},
+  \bibinfo{address}{Berlin, Heidelberg}),
+  \dourl{https://doi.org/10.1007/978-3-540-77550-8_2},
+  \dodoi{10.1007/978-3-540-77550-8_2}.
+
+\bibitem{sdpm}
+\bibinfo{author}{M.~A. Choma}, \bibinfo{author}{A.~K. Ellerbee},
+  \bibinfo{author}{C.~Yang}, \bibinfo{author}{T.~L. Creazzo}, and
+  \bibinfo{author}{J.~A. Izatt}, \enquote{\bibinfo{title}{Spectral-domain phase
+  microscopy}},  \bibinfo{journal}{Opt. Lett.} \textbf{30}(10),
+  \bibinfo{pages}{1162--1164} (\bibinfo{year}{2005})
+  \dourl{http://ol.osa.org/abstract.cfm?URI=ol-30-10-1162}
+  \dodoi{10.1364/OL.30.001162}.
+
+\bibitem{gao}
+\bibinfo{author}{S.~S. Gao}, \bibinfo{author}{R.~Wang}, \bibinfo{author}{P.~D.
+  Raphael}, \bibinfo{author}{Y.~Moayedi}, \bibinfo{author}{A.~K. Groves},
+  \bibinfo{author}{J.~Zuo}, \bibinfo{author}{B.~E. Applegate}, and
+  \bibinfo{author}{J.~S. Oghalai}, \enquote{\bibinfo{title}{Vibration of the
+  organ of corti within the cochlear apex in mice}},  \bibinfo{journal}{Journal
+  of neurophysiology} \textbf{112} (\bibinfo{year}{2014})
+  \dodoi{10.1152/jn.00306.2014}.
+
+\bibitem{dongoghalai}
+\bibinfo{author}{W.~Dong}, \bibinfo{author}{A.~Xia}, \bibinfo{author}{P.~D.
+  Raphael}, \bibinfo{author}{S.~Puria}, \bibinfo{author}{B.~E. Applegate}, and
+  \bibinfo{author}{J.~S. Oghalai}, \enquote{\bibinfo{title}{Organ of corti
+  vibration within the intact gerbil cochlea measured by volumetric optical
+  coherence tomography and vibrometry}},  \bibinfo{journal}{Journal of
+  Neurophysiology} \textbf{120} (\bibinfo{year}{2018})
+  \dodoi{10.1152/jn.00702.2017}.
+
+\bibitem{fallah}
+\bibinfo{author}{E.~Fallah}, \bibinfo{author}{C.~E. Strimbu}, and
+  \bibinfo{author}{E.~S. Olson}, \enquote{\bibinfo{title}{Nonlinearity and
+  amplification in cochlear responses to single and multi-tone stimuli}},
+  \bibinfo{journal}{Hearing Research} \textbf{377}, \bibinfo{pages}{271–281}
+  (\bibinfo{year}{2019}) \dodoi{10.1016/j.heares.2019.04.001}.
+
+\bibitem{strimbu2020}
+\bibinfo{author}{C.~E. Strimbu}, \bibinfo{author}{Y.~Wang}, and
+  \bibinfo{author}{E.~S. Olson}, \enquote{\bibinfo{title}{Manipulation of the
+  endocochlear potential reveals two distinct types of cochlear nonlinearity}},
+   \bibinfo{journal}{Biophysical Journal} \textbf{119}(10),
+  \bibinfo{pages}{2087--2101} (\bibinfo{year}{2020})
+  \dourl{https://www.sciencedirect.com/science/article/pii/S0006349520308055}
+  \dodoi{https://doi.org/10.1016/j.bpj.2020.10.005}.
+
+\bibitem{fangyi}
+\bibinfo{author}{F.~Chen}, \bibinfo{author}{D.~Zha},
+  \bibinfo{author}{A.~Fridberger}, \bibinfo{author}{J.~Zheng},
+  \bibinfo{author}{N.~Choudhury}, \bibinfo{author}{S.~L. Jacques},
+  \bibinfo{author}{R.~K. Wang}, \bibinfo{author}{X.~Shi}, and
+  \bibinfo{author}{A.~L. Nuttall}, \enquote{\bibinfo{title}{A differentially
+  amplified motion in the ear for near-threshold sound detection}},
+  \bibinfo{journal}{Nature Neuroscience} \textbf{14}(6),
+  \bibinfo{pages}{770–774} (\bibinfo{year}{2011}) \dodoi{10.1038/nn.2827}.
+
+\bibitem{lee}
+\bibinfo{author}{H.~Y. Lee}, \bibinfo{author}{P.~D. Raphael},
+  \bibinfo{author}{A.~Xia}, \bibinfo{author}{J.~Kim},
+  \bibinfo{author}{N.~Grillet}, \bibinfo{author}{B.~E. Applegate},
+  \bibinfo{author}{A.~K.~E. Bowden}, and \bibinfo{author}{J.~S. Oghalai},
+  \enquote{\bibinfo{title}{Two-dimensional cochlear micromechanics measured in
+  vivo demonstrate radial tuning within the mouse organ of corti}},
+  \bibinfo{journal}{Journal of Neuroscience} \textbf{36}(31),
+  \bibinfo{pages}{8160–8173} (\bibinfo{year}{2016})
+  \dodoi{10.1523/jneurosci.1157-16.2016}.
+
+\bibitem{cooper}
+\bibinfo{author}{N.~P. Cooper}, \bibinfo{author}{A.~Vavakou}, and
+  \bibinfo{author}{M.~Van Der~Heijden}, \enquote{\bibinfo{title}{Vibration
+  hotspots reveal longitudinal funneling of sound-evoked motion in the
+  mammalian cochlea}},  \bibinfo{journal}{Nature Communications} \textbf{9}(1),
+  \bibinfo{pages}{3054} (\bibinfo{year}{2018})
+  \dodoi{10.1038/s41467-018-05483-z}.
+
+\bibitem{frost2022}
+\bibinfo{author}{B.~L. Frost}, \bibinfo{author}{C.~E. Strimbu}, and
+  \bibinfo{author}{E.~S. Olson}, \enquote{\bibinfo{title}{Using volumetric
+  optical coherence tomography to achieve spatially resolved organ of corti
+  vibration measurements}},  \bibinfo{journal}{Journal of the Acoustical
+  Society of America} \textbf{151}, \bibinfo{pages}{1115--1125}
+  (\bibinfo{year}{2022}).
+
+\bibitem{cooper2018}
+\bibinfo{author}{N.~P. Cooper}, \bibinfo{author}{A.~Vavakou}, and
+  \bibinfo{author}{M.~van~der Heijden}, \enquote{\bibinfo{title}{Vibration
+  hotspots reveal longitudinal funneling of sound-evoked motion in the
+  mammalian cochlea}},  \bibinfo{journal}{Nature Communications} \textbf{9},
+  \bibinfo{pages}{3054} (\bibinfo{year}{2018}).
+
+\bibitem{Puria2022}
+\bibinfo{author}{N.~H. Cho} and \bibinfo{author}{S.~Puria},
+  \enquote{\bibinfo{title}{Motion of the cochlear reticular lamina varies
+  radially across outer-hair-cell rows}},  \bibinfo{journal}{bioRxiv}
+  (\bibinfo{year}{2022})
+  \dourl{https://www.biorxiv.org/content/early/2022/03/04/2022.03.01.482580}
+  \dodoi{10.1101/2022.03.01.482580}.
+
+\bibitem{yoon}
+\bibinfo{author}{Y.-J. Yoon}, \bibinfo{author}{C.~R. Steele}, and
+  \bibinfo{author}{S.~Puria}, \enquote{\bibinfo{title}{Feed-forward and
+  feed-backward amplification model from cochlear cytoarchitecture: An
+  interspecies comparison}},  \bibinfo{journal}{Biophysical Journal}
+  \textbf{100}(1), \bibinfo{pages}{1--10} (\bibinfo{year}{2011})
+  \dodoi{10.1016/j.bpj.2010.11.039}.
+
+\bibitem{dongolson}
+\bibinfo{author}{W.~Dong} and \bibinfo{author}{E.~S. Olson},
+  \enquote{\bibinfo{title}{Detection of cochlear amplification and its
+  activation}},  \bibinfo{journal}{Biophysical Journal} \textbf{105}(4),
+  \bibinfo{pages}{1067–1078} (\bibinfo{year}{2013})
+  \dodoi{10.1016/j.bpj.2013.06.049}.
+
+\bibitem{cooperMOHJapan}
+\bibinfo{author}{N.~P. Cooper}, \enquote{\bibinfo{title}{Radial variation in
+  the vibrations of the cochlear partition}}, in
+  \emph{\bibinfo{booktitle}{Recent Developments in Auditory Mechanics}},
+  \bibinfo{publisher}{World Scientific}, \bibinfo{address}{Singapore}
+  (\bibinfo{year}{2000}), pp. \bibinfo{pages}{109--115}.
+
+\bibitem{Warren}
+\bibinfo{author}{R.~L. Warren}, \bibinfo{author}{S.~Ramamoorthy},
+  \bibinfo{author}{N.~Ciganovi{\'c}}, \bibinfo{author}{Y.~Zhang},
+  \bibinfo{author}{T.~M. Wilson}, \bibinfo{author}{T.~Petrie},
+  \bibinfo{author}{R.~K. Wang}, \bibinfo{author}{S.~L. Jacques},
+  \bibinfo{author}{T.~Reichenbach}, \bibinfo{author}{A.~L. Nuttall}, and
+  \bibinfo{author}{A.~Fridberger}, \enquote{\bibinfo{title}{Minimal basilar
+  membrane motion in low-frequency hearing}},  \bibinfo{journal}{Proceedings of
+  the National Academy of Sciences} \textbf{113}(30),
+  \bibinfo{pages}{E4304--E4310} (\bibinfo{year}{2016})
+  \dourl{https://www.pnas.org/content/113/30/E4304}
+  \dodoi{10.1073/pnas.1606317113}.
+
+\end{thebibliography}
