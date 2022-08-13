@@ -115,39 +115,4 @@
   \dourl{https://www.biorxiv.org/content/early/2022/03/04/2022.03.01.482580}
   \dodoi{10.1101/2022.03.01.482580}.
 
-\bibitem{yoon}
-\bibinfo{author}{Y.-J. Yoon}, \bibinfo{author}{C.~R. Steele}, and
-  \bibinfo{author}{S.~Puria}, \enquote{\bibinfo{title}{Feed-forward and
-  feed-backward amplification model from cochlear cytoarchitecture: An
-  interspecies comparison}},  \bibinfo{journal}{Biophysical Journal}
-  \textbf{100}(1), \bibinfo{pages}{1--10} (\bibinfo{year}{2011})
-  \dodoi{10.1016/j.bpj.2010.11.039}.
-
-\bibitem{dongolson}
-\bibinfo{author}{W.~Dong} and \bibinfo{author}{E.~S. Olson},
-  \enquote{\bibinfo{title}{Detection of cochlear amplification and its
-  activation}},  \bibinfo{journal}{Biophysical Journal} \textbf{105}(4),
-  \bibinfo{pages}{1067–1078} (\bibinfo{year}{2013})
-  \dodoi{10.1016/j.bpj.2013.06.049}.
-
-\bibitem{cooperMOHJapan}
-\bibinfo{author}{N.~P. Cooper}, \enquote{\bibinfo{title}{Radial variation in
-  the vibrations of the cochlear partition}}, in
-  \emph{\bibinfo{booktitle}{Recent Developments in Auditory Mechanics}},
-  \bibinfo{publisher}{World Scientific}, \bibinfo{address}{Singapore}
-  (\bibinfo{year}{2000}), pp. \bibinfo{pages}{109--115}.
-
-\bibitem{Warren}
-\bibinfo{author}{R.~L. Warren}, \bibinfo{author}{S.~Ramamoorthy},
-  \bibinfo{author}{N.~Ciganovi{\'c}}, \bibinfo{author}{Y.~Zhang},
-  \bibinfo{author}{T.~M. Wilson}, \bibinfo{author}{T.~Petrie},
-  \bibinfo{author}{R.~K. Wang}, \bibinfo{author}{S.~L. Jacques},
-  \bibinfo{author}{T.~Reichenbach}, \bibinfo{author}{A.~L. Nuttall}, and
-  \bibinfo{author}{A.~Fridberger}, \enquote{\bibinfo{title}{Minimal basilar
-  membrane motion in low-frequency hearing}},  \bibinfo{journal}{Proceedings of
-  the National Academy of Sciences} \textbf{113}(30),
-  \bibinfo{pages}{E4304--E4310} (\bibinfo{year}{2016})
-  \dourl{https://www.pnas.org/content/113/30/E4304}
-  \dodoi{10.1073/pnas.1606317113}.
-
 \end{thebibliography}

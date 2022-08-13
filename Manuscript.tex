@@ -1,4 +1,5 @@
 \documentclass[preprint,NumberedRefs]{JASA}
+\DeclareMathOperator*{\argmin}{argmin}
 
 
 \begin{document}
@@ -30,8 +31,10 @@
 \par{A series of A-Scans at one location is referred to as a motion scan (M-Scan). The phase of a single pixel as a function of time is proportional to the sub-pixel displacement \textit{along the axis of the beam} of structures at that position \citep{sdpm}. That is, an M-Scan allows us to measure a projection of the 3-D motion of a structure onto the beam axis.}
 \par{The nature of the modality leads to several important complications: (1) as OCT images are based on reflectivity, they are \textit{label-free}, so structures must be identified via known anatomy and intuition; (2) displacement measurements are 1-D projections of 3-D motions. These issues are even further complicated by the fact that the optical axis is often decided via the constraints of the preparation, and its relationship to the anatomy is often not known \textit{a priori}.}
 \par{We have discussed these issues in terms of the anatomical coordinates of the cochlea (longitudinal, radial and transverse), using volume scans to determine the optical axis' relation to more physiologically relevant axes \citep{frost2022}. Using this method, one can account for the longitudinal (tonotopic) distance between measured points in a single A-Scan. One can also determine which components of motion are most represented in a measurement, offering more context to reported results. However, even this is not sufficient to separate out the motion components themselves.}
-\par{It has been shown by Cooper et al that viewing angle can significantly impact both the magnitude and phase response of the structures being measured \citep{cooper2018}. Moreover, recent purely transverse measurements in the gerbil base have shown different character than measurements taken at an angle relative to basilar membrane (BM) normal \citep{Puria2022}. FOR EXAMPLE SEE FIG WHICH EXPLAINS DIFFERENCE BETWEEN TRANSV AND ANGLED MEAS}
-\par{Several methods have been developed to attempt to address this problem. Lee et al used back-projection of measurements taken at two different angles to reconstruct radial-transverse motion in mouse, via carefully rotating the preparation to ensure they stay in the same cross-section \citep{lee}. Kim et al used a three-beam OCT system in mouse to measure motion at the same location from three angles, and back-project to resolve three-dimensional motion CITE. These methods are challenging to implement in the gerbil base, where the anatomy and opacity of the bone significantly restricts the beam angle when viewing through the round window (RW). The latter method also requires significant hardware and space.}
+\par{It has been shown by Cooper et al that viewing angle can significantly impact both the magnitude and phase response of the structures being measured \citep{cooper2018}. For example, purely transverse measurements in the gerbil base have shown different character than measurements taken at an angle relative to basilar membrane (BM) normal \citep{Puria2022}. SHOW SOME FIGURE HERE FOR DIFFERENCES.}
+\par{Recent efforts have been made to better understand intra-OCC motion at anatomically relevant angles, as these measurements could better aid in our understanding of cochlear micromechanics. For example, radial motion of the tectorial mebrane and stereocilia is responsible for the transduction that results in neural responses and electromotility in inner and outer hair cells, respectively. Longitudinal motion may clarify the impact of fluid motion intra-OCC, where cells may not simply move as rigid bodies.} 
+\par{One possible solution is to measure motion directly at an angle of interest. For example, Cho et al have measured at a transverse angle in the hook region of the gerbil base, and Ren et al have similarly made purely transverse measurements of the reticular lamina in the gerbil base. Preliminary work has also been done to make exclusively radial measurements of intra-OCC motion in mouse. However, such measurement angles are not available in certain preparations, dependent on species and frequency location of interest.}
+\par{Other methods have been developed to reconstruct motion along physiologically relevant axes without directly measuring along any of these axes explicitly. Lee et al used back-projection of measurements taken at two different angles to reconstruct radial-transverse motion in mouse, via carefully rotating the preparation to ensure they stay in the same cross-section \citep{lee}. Kim et al used a three-beam OCT system in mouse to measure motion at the same location from three angles, and back-project to resolve three-dimensional motion CITE. These methods are challenging to implement in the gerbil base, where the anatomy and opacity of the bone significantly restricts the beam angle when viewing through the round window (RW). The latter method also requires significant hardware and space.}
 \par{We have developed a method to reconstruct the longitudinal and transverse components of motion \textit{in vivo} via OCT. Similar to the work described above, we reconstruct via back-projecting measurements taken at two angles. However, our method performs registration via \textit{physiology} rather than mechanical precision -- our method requires no \textit{a priori} knowledge of either measurement angle, or of the precise positions of the structures being measured. Instead we use the traveling wave phase on the BM, along with a simplified version of the orientation program presented in Frost et al, 2022, to register intra-OCC positions between viewing angles. This allows the method to work in any species or preparation, including in the gerbil base in which we are particularly interested.}
 \par{We present the method, an analysis of the accuracy of this method as a function of angular distance between viewing angles, and \textit{in vivo} experimental data taken through the RW in gerbil. We present longitudinal and transverse motion at the outer hair cell/Deiters' cell junction (OHC-DC), and see that the transverse data matches well with previously measured purely transverse motion in the gerbil base. In particular, we see that transverse OHC-DC motion phase lags BM motion phase across frequency by ~0.3 cycles, save at high SPL where the two seem to move in-phase. This is in stark contrast with motion measured at an angle with a longitudinal component, where a broadband phase lead of OHC-DC re BM is often seen \citep{frost2022}.}
 
@@ -91,7 +94,13 @@ The component of the measurement axis in the longitudinal direction is simply th
 \par{This gives us $N$ measurements of the structure evenly spaced longitudinally. In each measurement line, we inevitably also measure BM at some point $\mathbf{b}^i_n$. As $\mathbf{z}\neq\mathbf{\hat{t}}$, the OHC-DC and BM points measured in each line are not in the same longitudinal cross-section. For example, suppose that on the $\mathbf{z}$ axis in a single A-Scan, the BM and OHC-DC are $\Delta = (\mathbf{p}^i_n-\mathbf{b}^i_n)\cdot\mathbf{z}$ apart. Ideally, this value is independent of the cross-section, or $n$. The cross-sectional distance (i.e. longitudinal distance) between these points is thereby $r^i = \Delta l_i$.}
 \par{Now let's once again consider our first OHC-DC measurement at $\mathbf{q}^i_0$. It is in the same cross-section as a point on the BM at $\mathbf{b}^i_0+r^i\mathbf{\hat{l}}$. We have taken many measurements of BM along the longitudinal axis, so if $\delta$ is small, there exists an $n$ such that $r^i \approx n\delta$. That is, $\mathbf{q}^i_0$ is approximately in the same cross-section as $\mathbf{b}^i_n$ for this $n$.}
 \par{We can repeat this process for all measured OHC-DC points to form a list of \textit{aligned} OHC-DC/BM pairs (i.e. OHC-DC and BM in the same cross-section) at each orientation. Using this list, we can reformulate the problem of registering OHC-DC points as one of registering BM points -- the OHC-DC points aligned to these BM points would also be registered.}
-\par{To register BM points between orientations, we use the traveling wave to our advantage. To begin, \textbf{we assume that the BM moves entirely transversely}. This means that viewed at any angle, the phase response of BM motion will be identical. To register points on the BM between orientations, we compare the phase response at $\mathbf{b}^1_n$ to $\mathbf{b}^2_m$ for $n,m=1,2,\ldots,N$, and find the values for which the phase responses are most similar (by minimum square difference). This yields registered BM points across some range of the BM. As we aligned the BM points to OHC points in the previous step, we now have OHC-DC points registered as well. We can then perform our reconstruction.}
+\par{To register BM points between orientations, we use the traveling wave to our advantage. To begin, \textbf{we assume that the BM moves entirely transversely}. This means that viewed at any angle, the phase response of BM motion will be identical. To register points on the BM between orientations, we compare the phase response at $\mathbf{b}^1_n$ to $\mathbf{b}^2_m$ for $n,m=1,2,\ldots,N$, and find the values for which the phase responses are most similar by minimum $L_2$ distance.}
+\par{That is, we start by comparing the phase response at $\mathbf{b}^1_0$ to $\mathbf{b}^2_m$ for $m=0,1,\ldots,N$, $\phi^1_0(f)$ and $\phi^2_m(f)$ respectively where $f$ is frequency. We find 
+	\begin{equation}
+		m_0 = \argmin_m E_{0,m} = \argmin_m ||\phi^1_0(f)-\phi^2_m(f)||,
+	\end{equation}
+and consider $\mathbf{b}^1_0$ and $\mathbf{b}^2_{m_0}$ to be registered. Because BM positions measured are spaced evenly longitudinally by $\delta$ in either orientation, this means that $\mathbf{b}^1_1$ and $\mathbf{b}^2_{m_0+1}$ are also registered, and so on.}
+\par{This yields registered BM points across some range of the BM. As we aligned the BM points to OHC points in the previous step, we now have OHC-DC points registered as well. We can then perform our reconstruction.}
 \par{To make this process more concrete, we provide an illustrative example in the Results section below.}
 \subsection{Error dependence on angular difference}
 \par{The presentation above is in an ideal environment, wherein the reconstruction can be performed from any two measurements at distinct angles. Mathematically, the error associated with the angular difference arises from the matrix in Eqn \ref{recon}. Note that this matrix must be invertible, which require full row rank -- i.e. the rows must not be colinear. The rows of this matrix are the measurement axes, $\mathbf{z}_1$ and $\mathbf{z}_2$, which will never be colinear by design. The invertibility of this matrix is thereby guaranteed.}
@@ -118,13 +127,13 @@ a monotonically increasing function of $\nu$.
 }
 \par{We now note that $\nu = \mathbf{z}_1\cdot\mathbf{z}_2$, whichmay offer a bit of intuition -- the dot product is largest when the two vetors are nearer to parrallel, yielding an increase in condition number. To be more mathematically precise,
 	\begin{equation}
-		\nu = ||\mathbf{z}_1||\,||mathbf{z}_2||\cos{\theta} = \cos{\theta},
+		\nu = ||\mathbf{z}_1||\,||\mathbf{z}_2||\cos{\theta} = \cos{\theta},
 	\end{equation}
 where $\theta$ is the angular distance between the two vectors and we have used the fact that the measurement axes are unit vectors. We now can use double angle trigonometric identities to write the condition number very succinctly as a function of the angular difference between the two measurement axes:
 	\begin{align}
 		\kappa &= \sqrt{\frac{1+\cos\theta}{1-\cos\theta}}\\
 			   &=\sqrt{\frac{1}{\tan^2\frac{\theta}{2}}}\\
-			   &=\frac{1}{\bigg|\tan\frac{\theta}{2}\bigg|}.
+			   &=\frac{1}{\big|\tan\frac{\theta}{2}\big|}.
 	\end{align}
 }
 \par{The condition number goes to infinity when the angular difference approaches 0, and approaches a minimum at 1 as the angular difference approaches 90$^\circ$. While 90$^\circ$ would be optimal, the maximum achievable angular difference is restricted by the experimental preparation. For example, in measurements taken through the gerbil round window, 15$^\circ$ is often the largest achievable angular difference. Table \ref{kappas} shows condition numbers for a selection of angular deviations achievable in gerbil through the round window membrane.}
@@ -132,11 +141,11 @@ where $\theta$ is the angular distance between the two vectors and we have used 
 
 \begin{table}
 \begin{center}
-    \begin{tabular}{|c|c|}
+	\begin{tabular}{|c|c|}
         \hline
         Angular deviation & Condition number $\kappa$ \\
         \hline
-        20$^\text{o}$ & 5.67\\
+		20$^\text{o}$ & 5.67\\
         15$^\text{o}$ & 7.60\\
         10$^\text{o}$ & 11.43\\
         5$^\text{o}$ & 22.90 \\
@@ -148,22 +157,76 @@ where $\theta$ is the angular distance between the two vectors and we have used 
 \end{center}
 \end{table}
 
-\section{Results}
+\par{\section{Results}
+We begin with an illustrative example of the method in an \textit{in vivo} gerbil preparation, wherein measurements were taken through the RW. The measurements are then compared to previously measured purely transverse OCC displacements.}
 \subsection{Illustrative example}
-\subsection{Comparison to previous measurements}
-
+\par{We choose to take $N=11$ measurements at each orientation of the sample, spaced $\delta=15$ $\mu$m apart longitudinally. Viewing the sample at the first orientation, we choose two points at the OHC-DC location,$\mathbf{p}^1_1$ and $\mathbf{p}^1_2$, and take their difference to find the longitudinal axis $\hat{l}^1=(,,)^T$. We choose $\mathbf{q}^1_0=\mathbf{p}^1_1$, as we are interested in points at the OHC-DC region. We then take 11 measurements, at $\mathbf{q}^1_0,\mathbf{q}^1_0+15\mathbf{\hat{l}}^1,\ldots,\mathbf{q}^1_0+(11\times15)\mathbf{\hat{l}}^1$.Our measurements are made using a 15-frequency Zwuis tone stimulus at several 40, 50, 60, 70 and 80 dB SPL.}
+\par{We repeat this process at the second orientation, where we find $\mathbf{\hat{l}}^2=(,,)^T$. This gives us all of the measurements we need for the experiment as described in the Methods section, and we can proceed with the mathematical reconstruction.}
+\par{The $\mathbf{\hat{z}}^i$-components of the unit longitudinal vectors let us find the measurement matrix components from Eqn \ref{recon}:
+	\begin{align}
+		l_1 = &,\;t_1 = \sqrt{1-l_1^2}= \\
+		l_2 = &,\;t_2 = \sqrt{1-l_2^2}=.
+	\end{align}
+}
+\par{Next, we look at A-Scans at each orientation to find aligned BM and OHC-DC points in the same cross-section. Considering an A-Scan taken at position $\mathbf{q}^1_0$, we see that the OHC-DC junction and BM measurements lie  pixels apart. In our system, a pixel is 2.7 $\mu$m, so the structures are longitudinally $\Delta = $ apart in the optical axis. This means that they lie $\Delta l_1 = $ apart longitudinally. Of all multiples of $\delta = 15$ $\mu$m, this value is closest to $ = \delta$. That is, this OHC-DC measurement is approximately aligned with the BM measured at $\mathbf{q}^1_0+\delta\mathbf{\hat{l}}=\mathbf{q}^1_2$. This BM point is $\mathbf{b}^1_2$, i.e. we have aligned OHC-DC $\mathbf{q}^1_0$ with BM $\mathbf{b}^1_2$.}
+\par{This relation holds for the rest of the points measured at this angle, so that the OHC-DC points are generally three runs apart from BM measured in the same A-Scan. This means that OHC-DC $\mathbf{q}^1_1$ is in the same cross-section as BM $\mathbf{b}^1_3$, and so on up to OHC $\mathbf{q}^1_8$ is aligned to $\mathbf{b}^1_{11}$. We can do the same at the second orientation as well to align OHC-DC points and BM points.}
+\par{Now we register BM points between orientations. We start by comparing the phase responses $\phi^1_0$ to $\phi^2_m$ for $m=0,1,\ldots,10$, and find that the BM from measurement 0 at orientation 1 is best aligned with BM from measurement   at orientation 2. This gives us several registered BM pairs, namely . An example of the matched phase responses can be seen in FIGURE, wherein the phase responses of BM points taken at these two orientations are nearly identical.}
+\par{Taking the registered BM points and observing our list of aligned BM and OHC-DC points, we can register several OHC-DC points to one another, namely . We can now perform the mathematical reconstruction at these locations.}
+\par{Reconstructions of longitudinal and transverse motion at the OHC-DC region at 4 positions alongside BM data from the same cross-section are shown in FIGURE. The features of these data are described below.}
+\par{As a note, using the values of $l_1$, $t_1$, $l_2$ and $t_2$ found above, we see that our measurement axes made  and  angles with the BM normal at orientations 1 and 2, respectively. The angular difference,   , yields a measurement matrix with condition number  . This is the factor by which our noise level is increased as a result of our reconstruction.}
+\subsection{Features of the data and comparison to previous measurements}
+\par{Observing first the magnitude of the reconstructed data, we see that OHC-DC motion in both the longitudinal and transverse direction are tuned to the same frequency as the BM, although less sharply than BM. Both components also show broadband linearity, which is characteristic of past OHC measurements made using tone complex stimuli. Transverse and longitudinal components of motion have similar magnitude at lower SPL, but diverge at 80 dB SPL.}
+\par{Observing the phase, the transverse component of OHC-DC motion at SPL lower than 80 dB lags BM across frequency by $\sim 0.3-0.4$ cycles. At 80 dB SPL and near the best frequency, the OHC-DC transverse component and BM move in phase. The longitudinal component is approximately half a cycle out of phase from transverse displacement across much of the tested frequency range. By the definition of our axes, this means that base-to-apex motion is approximately in phase with Scala Media-to-Scala Tympani motion.}
+\par{To validate our method, we compare to previously measured transverse data. Recent measures from Cho et al and our lab from the hook region are shown in FIGURE. Cho et al's measurements are taken using single-tone stimuli, while ours are taken using Zwuis tone complexes. Comparing to our reconstruction, we can see the following about OHC-DC transverse motion: 1) the motion exhibits broadband nonlinearity when measured using Zwuis tone complexes; 2) it is tuned to the same frequency as BM; 3) at frequencies above 0.5 BF, OHC-DC transverse phase lags BM by $\sim$0.3 cycles at lower SPL; 4) at higher SPL near BF, BM and OHC-DC move in phase in measurements taken using Zwuis tone complexes. }
+\par{These characteristic similarities provide evidence that our model is correctly reconstructing these components of motion in the OHC-DC region. In particular, our original puzzle -- that OHC-DC re BM phase responses look vastly different when measured from different angles -- is resolved by these data.}
+\par{Our reconstruction also indicates that there is a significant component of motion in the longitudinal direction at the OHC-DC junction. As the OHCs are not significantly longitudinally slanted in gerbil (CITE), this is not readily interpreted as a feature of electromotility. Instead, it may indicate the effects of fluid on these structures that is distinct from the more rigid BM, or the impact of other longitudinally tilted processes within the OCC (CITE) on OHC-DC. Study of longitudinal motion in other regions of the OCC could shed more light on the interpretation of measurements such as these.}
 \section{Extensions of the method}
 \par{Here we discuss two theoretical extensions of the method presented here -- one in which the accuracy of the method is improved by measuring from more than two longitudinal-transverse angles, and one in which the method is extended to reconstruct all three components of motion. Similar to the presented methods, these techniques require only a single OCT system and do not require any \textit{a priori} knowledge of the measurement angles or precise locations of the structures being measured.}
+\par{Both proposed extensions require measurements at more than two angles to be taken. This would result in an improvement of the measured data, but would also be significantly more time-consuming and reduce the experiment's yield.}
 \subsection{Overdetermined reconstruction}
-\subsection{Three-dimensional analogue}
+\par{In the method presented above, we take measurements from two angles and solve a deterministic system of two linear equations in two variables. We note the impact of noise in these measurements as it pertains to the condition number of the measurement matrix, which can only be improved via increasing the angular difference between measurement angles.}
+\par{However, one could also improve the accuracy by employing the same experimental method, but measure structures at $M>2$ angles. We call the measured displacements of a registered structure along these axes $\delta_1,\delta_2,\ldots,\delta_M$ and write the respective measurement axes in terms of components $l_1,t_1,l_2,t_2,\ldots,l_M,t_M$. At each registered location, one would now have a system of $M$ equations in 2 variables -- an overdetermined system. Mathematically, we can write the system as follows:
+	\begin{equation}
+		y=Ax
+		\label{overd}
+	\end{equation}
+}
+\par{As a result of noise, this over-determined system will not have a solution -- no value of the true motion $\mathbf{d}$ can yield all $M$ measured projections. Instead, we must make an \textit{educated guess} of the true motion based on our noisy projection measurements.}
+\par{The equation \textit{actually} describing the projection at angle $m=1,2,\ldots,M$ is 
+	\begin{equation}
+		d_l l_m+d_t t_m + \eta_m = \delta_m,
+	\end{equation}
+where $\eta_m$ is a realization of noise that is different in each measurement, and of course, unknown. Thereby, instead of trying to solve this equation, we try to minimize:
+\begin{equation}
+	\mathcal{E}=\sum_{m=1}^M ||\delta_m-(d_ll_m + d_t t_m)||^2.
+\end{equation}
+The values of $d_l$ and $d_t$ that minimize $\mathcal{E}$ are the least-squares-optimal solution to this overdetermined problem.}
+\par{In general, let $\mathbf{x}$ and $\mathbf{y}$ be vectors and $A$ be a matrix. The least-squares-optimal solution to an overdetermined linear system $\mathbf{y}=A\mathbf{x}$ is $\mathbf{x}_0=A^\dagger y$, where $A^\dagger$ is the \textit{Moore-Penrose pseudoinverse} of $A$. Most computational software packages include a routine to compute this pseudoinverse (for example, MATLAB's \texttt{pinv}.}
+\par{If one wished to employ this version of the method, they would take measurements at $M$ angles along a large longitudinal stretch as described above. They would compute $l_m$ and $t_m$ for each orientation, and register points based on BM phase just as in the two-angle case. At each registered point, they will then reconstruct the true motion via
+\begin{equation}
+	\mathbf{d} = A^\dagger \delta.
+\end{equation}
+Note that as the pseudoinverse of an invertible matrix is equal to the inverse of said matrix, this equation degenerates to Eqn \ref{recon} from the standard method in the $M=2$ case.
+}
+
+\subsection{Extension to three dimensions}
+\par{Naturally, after two-dimensional reconstruction, one looks to the third and final spatial dimension -- in this case, the radial dimension. To reconstruct three-dimensional motion requires motion measurements from three angles, and also requires at least one of our measurement axes to have a radial component. This complicates certain steps in our experimental method, but not insurmountably so.}
+\par{First, let's note the 3-D reconstruction formula as a simple generalization of the 2-D formula:
+\renewcommand*{\arraystretch}{.5}
+	\begin{equation}
+		\begin{pmatrix}d_l\\d_r\\d_t\end{pmatrix} = \begin{pmatrix}l_1&r_1&t_1\\l_2&r_2&t_2\\l_3&r_3&t_3\end{pmatrix}^{-1}\begin{pmatrix}\delta_1\\ \delta_2 \\ \delta_3 \end{pmatrix},
+	\end{equation}
+	where $\delta_i$ are the measured displacements at angles $i=1,2,3$, and $\mathbf{\hat{z}}_i=(l_i\,r_i\,t_i)^T$ is the measurement axis at angle $i$. 
+}
+\par{At each measurement angle, the longitudinal direction can still be computed in the same way, and longitudinally spaced measurements can still be taken along the cochlea just as before. As BM phase response does not vary across radial position within a single cross-section, the registration method can be used just as before.}
+\par{The only difference comes in determining the measurement matrix, which is now $3\times 3$. For this purpose, our previously presented orientation program is well-suited for the task. Given a volume scan at each orientation, this program can be used to approximate the anatomical components of the measurement axis. This would give $\mathbf{\hat{z}}_i$ for $i=1,2,3$, and thereby allow for the complete 3-D reconstruction.}
+
+\par{Experiments}
 
 \section{Conclusions}
+\par{We have presented a method for reconstructing transverse and longitudinal motion in the OCC and provided evidence of its function via comparison of a test data set to previously measured transverse motion measured in the OHC-DC region in gerbil base. This method requires only a single OCT machine, relying on the physiology of the cochlea rather than external hardware.}
+\par{In future, this method could be applied to other regions within the OCC to paint a more complete picture of micromechanical motion -- in particular, it may help to understand the impact of longitudinal fluid motion and longitudinally tilted processes in the OCC. Extensions of the method, as presented here, could also be achieve a 3-D profile of intra-OCC motion.} 
 
-\subsection{Coordinate Systems}
-
-\par{A B-Scan is used to position the experimenter within the cochlea. We refer to this imaging plane as the \textit{orienting B-Scan}. The \textit{optical coordinate system} is defined with respect to this plane as follows: the direction into the sample (the optical axis) is $\mathbf{z}$. This is the vertical direction in the B-scan, positive from top-to-bottom. The horizontal direction in the B-Scan from left-to-right is $\mathbf{y}$, and the normal to the orienting B-Scan is the $\mathbf{x}$ direction such that $\mathbf{x}\times \mathbf{y} = \mathbf{z}$ (Fig. \ref{crosssec1} E). That is, $\mathbf{x}$ is in the direction into the page. The volume scan is generated by taking multiple $\mathbf{yz}$-plane B-Scans along the $\mathbf{x}$ axis with the orienting B-Scan as the center scan within the volume.}
-\par{The \textit{anatomical coordinate frame} is defined in the following way: the direction along the tonotopic axis (the direction along which the cochlea spirals) from base to apex is the longitudinal axis $\mathbf{l}$, the direction across the BM normal to $\mathbf{l}$ from the modiolus to the outer wall is the radial axis $\mathbf{r}$ and the direction normal to the BM towards scala media is the transverse axis $\mathbf{t}=\mathbf{l}\times\mathbf{r}$ (Fig. \ref{crosssec1} C). This frame varies smoothly in orientation with respect to Cartesian coordinates as it spirals along the cochlea.}
-{Our goal is to approximate these anatomical coordinates in terms of optical coordinates at all locations where we wish to measure vibrations. We do this using the planar approximation of the BM local to the orienting B-Scan, as described above. The normal to the BM plane is the local transverse direction $\mathbf{t}$, and the longitudinal and radial directions lie within the plane defined by the local BM. Fig. \ref{coords} shows these coordinate systems, as well as a local approximation of anatomical coordinates.}
 
 \begin{figure}[h!]
 \centering
@@ -171,120 +234,6 @@ where $\theta$ is the angular distance between the two vectors and we have used 
 \caption{The coordinate systems used in the development of this program. \textbf{A} -- the optical coordinate system, defined with respect to the orienting B-Scan, shown alongside a representative B-Scan; \textbf{B} -- the anatomical coordinate frame, which varies so as to always be tangent to the BM at any point, shown at a point along a cartoon of the cochlea; \textbf{C} -- the local approximation of the anatomical coordinate system, defined with respect to a plane that approximates the BM's plane (shown as a gray surface).}
 \label{coords}
 \end{figure}
-
-\subsection{Determining the Approximate Anatomical Plane}
-
-\par{A volume scan is acquired using ThorImage software from Thorlabs, \textcolor{blue}{which allows the user to select the dimensions of the volume (which is always in the shape of a rectangular prism), as well as the spacing between the A-Scans which comprise the volume. In selecting the spacing, it is important to choose a spacing well below the lateral resolution of the OCT system so that as few as possible features are lost due to quantization. Our lateral resolution is about 10 $\mu$m, so we use 2 $\mu$m $\times$ 2 $\mu$m spacing. The axial spacing is determined by the bandwidth and wavelength of the light source, and is 2.7 $\mu$m \cite{OCTtheory}.} This volume is then imported into our coordinate transformation program. The volume scan is selected so that the orienting B-Scan lies in the center, where the volume comprises a set of  B-Scans parallel to this orienting B-Scan. As described above, at least two B-Scans are necessary to select points which define the local BM plane. So that the approximation is best near the orienting B-Scan, we choose two parallel B-Scans separated by $\Delta x$ in the $\mathbf{x}$ direction, equidistant from the orienting B-Scan. In the first of these B-Scans, we select two points on the BM,  $\mathbf{A}$ and $\mathbf{B}$. We select $\mathbf{B}$ to be the point on the BM nearest the outer wall and $\mathbf{A}$ to be the point nearest the spiral lamina. The BM in this cross-section should be well-approximated by the line segment $\overline{\mathbf{B}\mathbf{A}}$. \textcolor{blue}{(A video demonstrating these and subsequent steps is included as Supplemental Material.)}}
-\par{We select the third point, $\mathbf{C}$, to be a point on the BM closest to the outer wall in the second B-Scan. We choose the second B-Scan to be apical to the orienting B-Scan (or mathematically, the projection of $\mathbf{l}$ onto $\overline{\mathbf{BC}}$ is positive).  As these three points determine the plane, we know the plane's unit normal vector \begin{equation}
-\mathbf{t} = \frac{(\mathbf{A}-\mathbf{B})\times(\mathbf{C}-\mathbf{B})}{||(\mathbf{A}-\mathbf{B})\times(\mathbf{C}-\mathbf{B})||}.
-\end{equation}
-This vector $\mathbf{t}$ is the transverse unit vector -- the normal to the BM. We go on to find the longitudinal and radial vectors, $\mathbf{l}$ and $\mathbf{r}$. We selected both $\mathbf{B}$ and $\mathbf{C}$ to be points on the BM nearest to the outer wall, so that they lie at the same transverse and radial positions in two different anatomical cross-sections. Thereby, the vector 
-\begin{equation}
-\mathbf{l} = \frac{\mathbf{C}-\mathbf{B}}{||\mathbf{C}-\mathbf{B}||}
-\end{equation}
-is the local approximation of the longitudinal direction. To complete the right-handed coordinate system, the radial direction is given by 
-\begin{equation}
-\mathbf{r} = \mathbf{t}\times\mathbf{l}.
-\end{equation}}
-
-
-\par{Following this analysis, the anatomical coordinate vectors,  $\mathbf{r}, \mathbf{t}, \mathbf{l}$ are represented in the ordered basis of optical coordinates $\{\mathbf{x},\mathbf{y},\mathbf{z}\}$.  The $\mathbf{z}$ components of the anatomical coordinate vectors, $l_z$, $r_z$, and $t_z$, give the $\mathbf{z}$-axis (optical axis -- the direction of measurement), written in anatomical coordinates, and their relative sizes indicate the degree to which a given anatomical direction is represented in a measurement.}
-
-\subsection{Determining the Coordinate Transformation}
-\par{To proceed, our goal is to find the relationship between optical and anatomical coordinates. Now that we have represented the anatomical coordinates in a system that is stationary with respect to optical coordinates, this can be framed as a change of basis problem. A mapping between two coordinate systems is described by a unique change of basis matrix $U$. The process described above produces the anatomical coordinate vectors $\{\mathbf{l},\mathbf{r},\mathbf{t}\}$ in terms of optical coordinates. The mapping \textit{from anatomical to optical coordinates} is the $3\times 3$ matrix whose columns are the anatomical coordinate vectors written in optical coordinates, i.e.
-\renewcommand*{\arraystretch}{.5}
-\begin{equation}
-U = \begin{pmatrix} l_{x} & r_{x} & t_{x} \\
-l_{y} & r_{y} & t_{y} \\
-l_{z} & r_{z} & t_{z}\end{pmatrix}.
-\end{equation}}
-\par{To explore the volume in anatomical coordinates, we map \textit{from optical to anatomical coordinates}. This is the inverse mapping of $U$. As all change of basis matrices are unitary, $U^{-1} = U^\text{T}$ maps from optical to anatomical coordinates.}
-
-
-\subsection{Determining the Displacement Measurement Direction}
-\par{Our first goal is to determine the direction of the vibratory motion we are measuring in anatomical coordinates. We refer to the displacement measurements along the optical ($\mathbf{z}$) axis as $d(\mathbf{p},f)$. This is a scalar-valued function of the position $\mathbf{p}$ and the frequency of the stimulus $f$. $d(\mathbf{p},f)$ is the $\mathbf{z}$ projection of the three-dimensional displacement $\mathbf{D}(\mathbf{p},f)$. We can write $\mathbf{D}(\mathbf{p},f)$ in the space of anatomical coordinates as follows:
-\begin{equation}
-\mathbf{D}(\mathbf{p},f) = D_l(\mathbf{p},f)\mathbf{l} + D_r(\mathbf{p},f)\mathbf{r} + D_t(\mathbf{p},f)\mathbf{t}.
-\end{equation}}
-\par{As we have expressed the unit vectors $\mathbf{l}$, $\mathbf{r}$ and $\mathbf{t}$ in the optical coordinates above, we know the $\mathbf{z}$-components of these unit vectors, which we write as $l_z$, $r_z$ and $t_z$ respectively. As such, our measurement is given by: \begin{equation}d(\mathbf{p},f) = D_l(\mathbf{p},f)l_z + D_r(\mathbf{p},f)r_z + D_t(\mathbf{p},f)t_z.
-\end{equation}}
-\par{In practice $l_z$, $r_z$ and $t_z$ are often all \textcolor{blue}{non-negligible}, and with a unidirectional motion measurement, we cannot determine $D_l$, $D_r$ and $D_t$ separately. (For clarity, consider the alternative -- if we were able to choose the optical axis to be perpendicular to the local plane of the BM, $l_z$ and $r_z$ would be zero, and $t_z$ would equal 1, so $d(\mathbf{p},f) =  D_t(\mathbf{p},f).)$}
-\subsection{Exploring Optical Space in Anatomical Coordinates}
-
-\par{The change of basis matrix $U$ gives us a simple way to explore the volume scan in terms of optical and anatomical coordinates simultaneously. We have developed a GUI, based in MATLAB and available upon request, that allows the user to traverse the volume in either coordinate system, shown in Fig. \ref{gui}. We refer to the GUI program as the \textit{orienting GUI}. As the user moves about the volume in one coordinate system, the other set of coordinates is computed by applying either $U$ or $U^T$ for anatomical-to-optical and optical-to-anatomical transformations respectively.  The red line represents the projection of the plane onto the B-Scan. Users can use sliders or enter values to traverse the volume in either coordinate system, and see the corresponding coordinates in both systems (anatomical on the left, optical on the right).} 
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\textwidth]{Figure3.pdf}
-\caption{GUI used to explore volumes in both optical and anatomical coordinates. Shown is the orienting B-Scan from experiment 900. The coordinate values of the blue point's location are shown in the anatomical (left) and optical (right) systems, and the A-Scan in which this point lies is shown in white. The red line is the planar approximation of the BM projected onto the displayed B-Scan.}
-\label{gui}
-\end{figure}
-
-\par{The orienting GUI has two main purposes: 1) to find the anatomical locations of structures measured in one A-Scan, and 2) to pick locations for measurement (in optical coordinates) based on their anatomical locations. One important application is to measure vibrations of different structures (such as the BM and OHC) within the same anatomical cross-section (that is, same $\mathbf{l}$-coordinate value). This is achieved as follows: first observe an A-Scan in which both the BM and OHC are present. Then, use the orienting GUI to determine the longitudinal location of the OHCs relative to the BM in that A-Scan. Next, determine the optical coordinates of a position on the BM in the same anatomical cross-section as those OHCs.  Finally, use the OCT positioning mirrors to set the optical axis along each of these A-scans sequentially, and take motion measurements at each. This allows the measurement of the motion of OHCs and BM within the same anatomical cross-section.}
-\par{\textcolor{blue}{It is important to note that structures within the OCC have tilts in longitudinal directions, so that measuring a part of a cell in the same longitudinal cross-section as the BM does not mean the \textit{entire} cell lies in the same longitudinal cross-section. However, the tilt of gerbil OHCs in the longitudinal direction is small (about $5^\text{o}$), so anatomical tilt has no significant effect on the application explored in the present work \cite{yoon}. Other structures in the OCC (in particular the Deiters cells' processes) have a significant longitudinal tilt that should be accounted for when their motion is measured.}}
-
-\subsection{\textcolor{blue}{Sensitivity to Point Selection}}
-\par{\textcolor{blue}{We close the Methods section by considering the sensitivity of our model to the choice of points $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{C}$, in order to understand how variation in user input will affect the operation of our program. To explore this problem, we consider a particular volume scan from Experiment 903, and a corresponding planar approximation based on experimenter-selected points $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{C}$. In determining these points, we used a 20 $\mu$m spacing between B-Scans. We consider the case in which two of these points are fixed and the third is selected at some point within a 40 $\mu$m $\times$ 40 $\mu$m square of the originally selected point (Fig. \ref{error} A and C). To contextualize this square, the lateral resolution of our OCT device is around 10 $\mu$m, and axial resolution is about 8 $\mu$m. That means that the square of tested values is about 4 $\times$ 5 units of optical resolution. Then, we consider the transverse unit vector computed by using this newly selected point, and compute the angle it makes with the original unit transverse vector, via the cosine rule of dot products. We do this %for $10^4$ points in this square
-varying point $\mathbf{A}$ with $\mathbf{B}$ and $\mathbf{C}$ fixed, and again varying point $\mathbf{C}$ with $\mathbf{A}$ and $\mathbf{B}$ fixed. The two tested squares of points are shown in Fig. \ref{error} A and C. Fig. \ref{error} B and D show the results: the resulting variation in the angle of the transverse unit vector relative to the originally computed angle.}}
-\par{\textcolor{blue}{The planar approximation is more sensitive to choice in the point $\mathbf{C}$ than point $\mathbf{A}$. This is unsurprising, as point $\mathbf{A}$ is far from both points $\mathbf{B}$ and $\mathbf{C}$, while point $\mathbf{C}$ is quite close to $\mathbf{B}$. The largest variation is about $15^\text{o}$, with point $\mathbf{C}$ chosen at the very edge of the test box, two units of lateral resolution and two and a half units of axial resolution away from the originally selected point. Next we explore the effect of this angular variation in the application of our program described above and performed in the Representative Example section below -- that is, the use of the program to locate OHCs and BM in the same longitudinal cross-section. For this application, we start with a point at the OHCs and then move purely in the computed transverse direction until we reach the BM. This distance is usually about 45 $\mu$m. %The computed points ``on the BM in the same longitudinal cross-section" are found by moving approximately 45 $\mu$m along these vectors. 
-The angular variation from above, $\theta$, gives rise to a variation in distance that is calculated using the law of cosines:
-\begin{equation}
-    d_{BM} = 45\sqrt{2-2\cos\theta}.
-\end{equation}
-The distance variation computed from the angular variation is shown as a second color bar in Fig. \ref{error} B and D. (Note that this calculation corresponds to a displacement vector containing components in all three anatomical directions, and thus is an upper bound on the variation in the longitudinal distance, which is the variation important for our particular application.) A worst case distance variation of 12 $\mu$m is in the far upper-right of panel D. Within the more reasonable selection range of 20 $\mu$m $\times$ 20 $\mu$m about the selected point, we see a maximum variation of about 5 $\mu$m. This variation can be compared with the $\sim$ 40  $\mu$m longitudinal distance between OHCs and the BM within a single B-scan noted in the introduction.  Using 5 $\mu$m as the maximum variability with reasonably careful point selection, the use of the program to locate OHCs and BM in the same longitudinal cross-section will be accurate to $\sim$ 12\%.}} %the program will identify the and the traveling wave phase would vary by about 6 degrees \cite{Ren2002}. This example, which is representative of results found for other volumes, shows that our method is not critically sensitive to choice in these points.}}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\textwidth]{Figure4.pdf}
-\caption{\textcolor{blue}{\textbf{A} -- A zoomed in B-Scan of the OCC in gerbil experiment 903, wherein points $\mathbf{A}$ and $\mathbf{B}$ are chosen. The experimenter's guess for point $\mathbf{A}$ is marked as a black cross, and the 40 $\mu$m $\times$ 40 $\mu$m box of tested $\mathbf{A}$ values is shown centered about this point. $\textbf{B}$ -- Angular difference between transverse unit vectors computed using the experimenter-chosen points and points in the box shown in panel A with points $\mathbf{B}$ and $\mathbf{C}$ fixed. The corresponding distance between computed BM positions is shown in a separate color bar to the right. \textbf{C} -- Similar to panel A, but in the second B-Scan in which $\mathbf{C}$ is chosen with the tested values of $\mathbf{C}$ shown. %Here, the second B-Scan was chosen to be 20 $\mu$m from the first in the optical $x$ direction. 
-\textbf{D} -- Similar to panel B, but using different values of $\mathbf{C}$ and fixing points $\mathbf{A}$ and $\mathbf{B}$.}}
-\label{error}
-\end{figure}
-
-\section{Results}
-
-\subsection{Representative Example}
-
-\par{We began with a 1 mm$\times$1 mm$\times$1.38 mm volume scan from gerbil through the round window. All data were taken using the ThorLabs Telesto 311 spectral domain OCT system using the LSM-03 objective lens. We used B-Scans $\Delta x = 20$ $\mu$m apart (each 10 $\mu$m from the orienting B-Scan) to choose points $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{C}$, as shown in Fig. \ref{lines}. With these three points, we determined the anatomical coordinates $\mathbf{l}$, $\mathbf{r}$ and $\mathbf{t}$. This also allows us to find the displacement measurement breakdown: $d(\mathbf{p},f) = D_l(\mathbf{p},f)l_z + D_r(\mathbf{p},f)r_z + D_t(\mathbf{p},f)t_z.$ The uniaxial measurement does not allow us to determine $D_l, D_r$ and $D_t$ but it shows which of these anatomical motions our uniaxial measurement is most sensitive to. In our example, with a commonly used angle of approach through the round window, the component multipliers had values $l_z = 0.8$, $r_z = -0.1$ and $t_z = 0.6$. This shows that in this example the most represented anatomical component of motion was longitudinal, with significant representation in the transverse direction. $r_z$ was relatively small, meaning that the optical axis is nearly perpendicular to the radial axis, and thus a motion measurement along this optical axis is not very sensitive to radial vibration.}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\textwidth]{Figure5.pdf}
-\caption{Plane approximation process, experiment 900. Two B-Scans from a single volume scan, 20 $\mu$m apart. Points $\mathbf{A}$ and $\mathbf{B}$ are chosen in the first B-Scan (left). This determines the line segment (shown in white) that approximates the BM in this cross-section. In the second B-Scan (right), $\mathbf{C}$ is chosen, completely defining the plane. The projection of that plane onto the second B-Scan is shown in white.}
-\label{lines}
-\end{figure}
-
-\par{Next, we use the orienting GUI to find the anatomical positions of the BM and OHC region along the initial A-Scan, as shown in Fig. \ref{process} A and B.  We found that the OHCs in the initial A-scan lay about 45 $\mu$m apical from the BM. We then used the program to determine the optical coordinates of the BM 45 $\mu$m apical of the initial A-scan -- this is a point on the BM in the same anatomical cross-section as the OHCs in the initial A-Scan (Fig. \ref{process} C). We took vibration measurements along these two A-scans in two sequential data runs, using the quantitative output of the orienting GUI to position the OCT mirrors to access each A-Scan in turn. This process can also be seen in the video included as Supplemental Material.}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=\textwidth]{Figure6.pdf}
-    \caption{Use of the orienting GUI to measure BM and OHC in the same anatomical cross-section. \textbf{A} -- To begin, we select an A-Scan containing BM and OHC. The zero point is set to be on the BM along this A-Scan, as shown here. \textbf{B} -- We move the $z$ slider so that the blue point is on the OHCs and the A-Scan has not changed. Only the $z$ optical coordinate changes, whereas all three anatomical coordinates have changed. The $l$ value indicates that the OHCs are about 45 $\mu$m apical of the BM in this A-Scan. \textbf{C} -- We find the measurement location necessary to measure BM motion in the same cross-section as OHC from the previous A-Scan by moving to the point with the same $l$ position but with $r=t=0$. The OCT(x,y) coordinates on the bottom right are the output data we use to direct the OCT positioning mirrors to the desired A-scan location.  \textbf{D} -- We display the measured displacement phase with respect to ear canal (EC) at the OHC and BM in the first A-Scan, as well as the BM in the second A-Scan. The OHC from run 1 and BM from run 2 are in the same anatomical cross-section.  Data taken at 80 dB SPL.}
-    \label{process}
-\end{figure}
-
-\par{Panel D in Fig. \ref{process} shows the vibration phases of the BM and OHC-region from two A-Scan locations in the same animal --  Run 1 OHC and BM are in the same A-Scan, whereas Run 2 BM is in the same anatomical cross-section as run 1 OHC. The BM and OHC vibration phases can be compared as measured along one A-scan (red compared to dark blue) or as measured within a single anatomical cross-section (red compared to light blue). Comparing within an A-Scan, the OHC vibration phase led the BM significantly at low frequencies, with the lead diminishing to zero as frequency increased. On the other hand, comparing within the anatomical cross-section, OHC vibration led the BM over the entire frequency range. The difference in the BM vibration measurements in the two runs likely occurs due to the longitudinal progression of the phase of the cochlea's travelling wave, which is frequency dependent. In these results, the OHC-BM phase differences within one A-Scan deviated from the OHC-BM phase differences within an anatomical cross-section by as much as a quarter-cycle. In the analysis of cochlear mechanics, a quarter cycle phase ``error" could shift an interpretation of results from power-neutral to power-generating or power-absorbing.  Thus, this magnitude of potential phase-reporting-error significantly impacts the study of the operation of the cochlea and the cochlear amplifier \citep{cooper, dongolson, fallah}.}
-
-\subsection{\textcolor{blue}{Testing Against} Known Physiology}
-\par{To \textcolor{blue}{test the functionality of our method}, we used data from an \textit{in vivo} gerbil experiment in which our program was used to probe an established property of cochlear mechanics. It is known that at a given longitudinal position (anatomical cross-section), the phase of BM motion is approximately the same at all locations spanning the BM radially \citep{cooperMOHJapan, Warren}. We used the BM planar approximation and coordinate transformation (the orienting GUI) to take BM motion recordings at what we computed to be locations that were all at the same longitudinal position, at locations that spanned the BM radially. We performed this process within two volume scans, each taken at a different orientation of the gerbil's head with respect to the scanner. The volume scans were taken such that a single B-Scan was not perpendicular to the longitudinal axis, and thus orienting across the BM radially involved navigating through a series of B-Scans. Fig. \ref{radial} illustrates the concept, with the box region indicating the x-y plane of the volume scan. In the results shown in Fig. \ref{raddata}, the vibration phase did not change as the measurement location moved radially across the BM. Thus, our results confirmed established findings, indicating that the orienting GUI successfully identified the anatomical cross-section.} 
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.7\textwidth]{Figure7.pdf}
-    \caption{Illustration of the method used to \textcolor{blue}{test} the operation of the orienting GUI \textcolor{blue}{against known physiology}. The blue band in each view indicates the basilar membrane. The magenta dots in the expanded view on the right indicate points that span the BM radially. The white box is the $\mathbf{x}$-$\mathbf{y}$ plane of a volume scan, with the interior white lines indicating the $\mathbf{y}$ axis of the B-Scans in which the magenta points lie. The orienting GUI identifies the locations of the magenta points, all of which lie in different B-Scans.}
-    \label{radial}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-   \includegraphics[width=\textwidth]{Figure8.pdf}
-    \caption{BM displacement data from experiment 900 from two different head angles \textcolor{blue}{provide evidence} that the GUI orientation program correctly identified the anatomical radial axis. \textbf{A} and \textbf{B} -- BM displacement amplitude and phase taken along a single anatomical cross-section at seven radial locations spaced 10 $\mu$m apart medial (aqua) to lateral (yellow), \textcolor{blue}{with locations approximated in \textbf{C}}; \textbf{D} and \textbf{E} -- BM displacement amplitude and phase taken in a different anatomical cross-section at radial locations spaced 20 or 40 $\mu$m apart medial (aqua) to lateral (brown), \textcolor{blue}{with locations approximated in \textbf{F}}. Data taken at 80 dB SPL.}
-    \label{raddata}
-\end{figure}
-
-\section{Conclusions}
-\par{We have presented a method for determining the location and orientation of the structures in OCT volume scans relative to their canonical anatomical coordinates. This method requires the presence of a locally planar structure, and the experimenter's selection of three points within two parallel B-Scans. It is a simple and fast process by which to add meaning to OCT measurements. In the context of cochlear mechanics, this allows us to determine the components of motion that are represented in our vibration measurements. It also allows us to measure structures with certain anatomical relationships to one another, such as being in the same anatomical cross-section, despite their not lying in the same B-Scan. Being able to take measurements of different structures at the same anatomical cross-section allows for more direct motion comparisons to be made. We have shown that this corrects for travelling wave phase differences between structures in a single A-Scan. The method can be used to probe phase differences between OHCs, Hensen's cells, and the BM, furthering the detailed mapping of micromechanical motions and the understanding of cochlear operation.}
-\par{While three-dimensional motion of the OCC can never be determined through a one-dimensional measurement, this program nevertheless offers insight into the results of three-dimensional cochlear models. When it is known which axis measurements are taken along, model results along this same axis can be compared to OCT measurements. In future work, measurements of the same structure taken at two or three known angles could be used to reconstruct two or three-dimensional motion.}
 
 \clearpage
 \bibliography{mybib.bib}

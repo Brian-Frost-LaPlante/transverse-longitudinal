@@ -6,45 +6,45 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: ManuscriptNotes.bib
 Database file #2: mybib.bib
 Warning--can't use both author and editor fields in OCTtheory
-You've used 16 entries,
+You've used 12 entries,
             3267 wiz_defined-function locations,
-            1248 strings with 14041 characters,
-and the built_in function-call counts, 6984 in all, are:
-= -- 358
-> -- 247
-< -- 1
-+ -- 88
-- -- 72
-* -- 1070
-:= -- 739
-add.period$ -- 16
-call.type$ -- 16
-change.case$ -- 15
+            1215 strings with 13060 characters,
+and the built_in function-call counts, 5072 in all, are:
+= -- 252
+> -- 189
+< -- 0
++ -- 67
+- -- 55
+* -- 787
+:= -- 545
+add.period$ -- 12
+call.type$ -- 12
+change.case$ -- 11
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 612
-empty$ -- 672
-format.name$ -- 87
-if$ -- 1361
+cite$ -- 13
+duplicate$ -- 444
+empty$ -- 481
+format.name$ -- 67
+if$ -- 975
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 153
-newline$ -- 63
-num.names$ -- 16
-pop$ -- 64
+int.to.str$ -- 12
+missing$ -- 113
+newline$ -- 51
+num.names$ -- 12
+pop$ -- 45
 preamble$ -- 2
 purify$ -- 0
 quote$ -- 0
-skip$ -- 84
+skip$ -- 55
 stack$ -- 0
-substring$ -- 330
-swap$ -- 656
-text.length$ -- 1
+substring$ -- 220
+swap$ -- 479
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 34
-width$ -- 18
-write$ -- 175
+while$ -- 24
+width$ -- 14
+write$ -- 134
 (There was 1 warning)
